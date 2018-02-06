@@ -3,12 +3,16 @@ import de.nixosoft.jlr.JLRGenerator;
 import de.nixosoft.jlr.JLROpener;
 
 import java.io.File;
-import java.io.IOException;
+import java.io.FileNotFoundException;
 
 public class Main {
 
     public static void main(String[] args) {
-        File pdfLaTeX = new File("C:\\Program Files\\MiKTeX 2.9\\miktex\\bin\\x64\\pdflatex.exe");
+        File resources = new File(System.getProperty("user.dir") + File.separator + "res");
+        File texDir = new File(resources.getAbsolutePath() + File.separator + "Tex");
+
+        //Define pdfLatex.exe file
+        File pdfLaTeX = new File(texDir.getAbsolutePath() + File.separator + "bin" + File.separator + "pdflatex.exe");
 
         //Directory where tex TEMPLATES are located
         File workingDirectory = new File(System.getProperty("user.dir") + File.separator + "TeX/");
