@@ -35,6 +35,7 @@ public class RepresentationLow extends Template{
     }
 
     public boolean generate(){
+        System.out.println("%-- TEX generating --%");
         t.append("\\documentclass[a4paper, landscape]{article}\n" +
                 "\\usepackage[utf8]{inputenc}\n" +
                 "\\usepackage[russian]{babel}\n" +
@@ -112,21 +113,18 @@ public class RepresentationLow extends Template{
         return true;
     }
 
-    public boolean complete(){
+    public File getTex(){
         try {
             if (file == null){
                 System.out.println("Template file is not defined");
-                return false;
             }
             writeToFile(t.toString(), file);
             lock();
-        } catch (IOException e) {
-            e.printStackTrace();
-            return false;
+            System.out.println("TEX is ready!");
         } catch (Throwable throwable) {
             throwable.printStackTrace();
         }
-        return true;
+        return file;
     }
 
     private void lock() throws Throwable {
