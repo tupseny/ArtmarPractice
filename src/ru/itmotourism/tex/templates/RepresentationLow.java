@@ -1,11 +1,9 @@
 package ru.itmotourism.tex.templates;
 
 import java.io.File;
-import java.io.IOException;
 
 public class RepresentationLow extends Template{
-    private StringBuilder t = new StringBuilder();
-    private File file;
+
     private String title1 = "ПРЕДСТАВЛЕНИЕ";
     private String title2 = "на присвоение (подтверждение),юношеских спортивных разрядов, I спортивного разряда, II спортивного разряда, III спортивного разряда";
     private String title3 = "Региональная спортивная федерация спортивного туризма,Санкт-Петербурга";
@@ -31,7 +29,7 @@ public class RepresentationLow extends Template{
     private String year = "2016";
 
     public RepresentationLow(File file){
-        this.file = file;
+        super.file = file;
     }
 
     public boolean generate(){
@@ -111,23 +109,5 @@ public class RepresentationLow extends Template{
                 "\\end{document}\n");
 
         return true;
-    }
-
-    public File getTex(){
-        try {
-            if (file == null){
-                System.out.println("Template file is not defined");
-            }
-            writeToFile(t.toString(), file);
-            lock();
-            System.out.println("TEX is ready!");
-        } catch (Throwable throwable) {
-            throwable.printStackTrace();
-        }
-        return file;
-    }
-
-    private void lock() throws Throwable {
-        this.finalize();
     }
 }

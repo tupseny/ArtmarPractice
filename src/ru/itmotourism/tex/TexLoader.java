@@ -14,7 +14,6 @@ public class TexLoader {
     public static final File TEX_DIR = new File(RES_DIR.getAbsolutePath() + File.separator + "TeX");
     public static final File BIN_DIR = new File(TEX_DIR.getAbsolutePath() + File.separator + "bin");
     public static final File PDF_LATEX = new File(BIN_DIR.getAbsolutePath() + File.separator + "pdflatex.exe");
-    public static final File TEMP_DIR = new File(TEX_DIR.getAbsolutePath() + File.separator + "temp");
     public static final File OUT_DIR = new File(TEX_DIR.getAbsolutePath() + File.separator + "out");
 
     private static HashSet<File> saveFiles = new HashSet<>();
@@ -23,7 +22,6 @@ public class TexLoader {
         System.out.println("%-- Static block --% (TexLoader)");
         makeDir(TEX_DIR);
         makeDir(BIN_DIR);
-        makeDir(TEMP_DIR);
         makeDir(OUT_DIR);
 
         saveFile(PDF_LATEX);
