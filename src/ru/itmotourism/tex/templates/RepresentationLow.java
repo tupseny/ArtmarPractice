@@ -1,13 +1,28 @@
 package ru.itmotourism.tex.templates;
 
 import java.io.File;
+import java.util.Calendar;
 
 public class RepresentationLow extends Template{
+    public void setColumnSize(float[] c) {
+        this.c1 = c[0];
+        this.c2 = c[1];
+        this.c3 = c[2];
+        this.c4 = c[3];
+        this.c5 = c[4];
+        this.c6 = c[5];
+        this.c7 = c[6];
+        this.c8 = c[7];
+    }
 
-    private String title1 = "ПРЕДСТАВЛЕНИЕ";
-    private String title2 = "на присвоение (подтверждение),юношеских спортивных разрядов, I спортивного разряда, II спортивного разряда, III спортивного разряда";
-    private String title3 = "Региональная спортивная федерация спортивного туризма,Санкт-Петербурга";
-    private String title4 = "Спортивный туризм";
+    public void setTitles(String[] t) {
+        this.title1 = t[0];
+        this.title2 = t[1];
+        this.title3 = t[2];
+        this.title4 = t[3];
+    }
+
+    //default values
     private float c1 = 0.015f;
     private float c2 = 0.13f;
     private float c3 = 0.08f;
@@ -16,20 +31,53 @@ public class RepresentationLow extends Template{
     private float c6 = 0.24f;
     private float c7 = 0.08f;
     private float c8 = 0.1f;
-    private int No = 1;
-    private String playerName = "Кузьменко";
-    private String birthDate = "21.02.1992";
-    private String rangName = "КМС";
-    private String rangDate = "12.12.2012";
-    private String competitionName = "Соревки";
-    private String result = "2 place";
-    private String teacherName = "Cherkasova";
-    private String organisationMaster = "Руководитель";
-    private String organisationName = "Организация";
-    private String year = "2016";
+    private String title1 = "ПРЕДСТАВЛЕНИЕ";
+    private String title2 = "на присвоение (подтверждение),юношеских спортивных разрядов, I спортивного разряда, II спортивного разряда, III спортивного разряда";
+    private String title3 = "Региональная спортивная федерация спортивного туризма,Санкт-Петербурга";
+    private String title4 = "Спортивный туризм";
 
-    public RepresentationLow(File file){
-        super.file = file;
+    public void setOrganisationMaster(String organisationMaster) {
+        this.organisationMaster = organisationMaster;
+    }
+
+    public void setOrganisationName(String organisationName) {
+        this.organisationName = organisationName;
+    }
+
+    public void setYear(String year) {
+        this.year = year;
+    }
+
+    private String organisationMaster = "Здесь будет важдный чувак";
+    private String organisationName = "ССК <<Кронверские барсы>>";
+    private String year = String.valueOf(Calendar.getInstance().get(Calendar.YEAR));
+
+    //custom values
+    private String no;
+    private String playerName;
+    private String birthDate;
+    private String rangName;
+    private String rangDate;
+    private String competitionName;
+    private String result;
+    private String teacherName;
+
+
+    public RepresentationLow(File file, String no, String playerName, String birthDate, String rangName, String rangDate, String competitionName,
+                             String result, String teacherName){
+        super(file);
+        this.no = no;
+        this.playerName = playerName;
+        this.birthDate = birthDate;
+        this.rangName = rangName;
+        this.rangDate = rangDate;
+        this.competitionName = competitionName;
+        this.result = result;
+        this.teacherName = teacherName;
+    }
+
+    public RepresentationLow(File file, String[] vals){
+        this(file, vals[0], vals[1], vals[2], vals[3], vals[4], vals[5], vals[6], vals[7]);
     }
 
     public boolean generate(){
@@ -79,7 +127,7 @@ public class RepresentationLow extends Template{
                 "&{Дата\\newlineвыполнения\\newlineразряда}&{Наименование соревнований, место и сроки проведения}" +
                 "&{Показанный\\newlineрезультат}&{Ф.И.О. тренера-преподавателя}\\\\\\hline\n");
         t.append("{")
-                .append(No).append("}&{")
+                .append(no).append("}&{")
                 .append(playerName).append("}&{")
                 .append(birthDate).append("}&{")
                 .append(rangName).append("}&{")

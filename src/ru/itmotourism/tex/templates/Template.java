@@ -9,10 +9,13 @@ public class Template {
     protected StringBuilder t = new StringBuilder();
     protected File file;
 
+    public Template(File file){
+        this.file = file;
+    }
+
     private void writeToFile(String txt, File file)throws IOException {
         BufferedWriter writer = new BufferedWriter(new FileWriter(file));
         writer.write(txt);
-
         writer.close();
     }
 

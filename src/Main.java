@@ -7,12 +7,24 @@ import java.io.IOException;
 public class Main {
 
     public static void main(String[] args) {
+
+        String[] values = {"1",
+                "Имя",
+                "31.05.1997",
+                "КМС",
+                "12.05.2017",
+                "Соревнования соревнования соревнования...",
+                "1 место",
+                "Черкасова М. О."};
+
         new TexLoader();
 
-        File repres = new File(TexLoader.TEX_DIR.getAbsolutePath() + File.separator + "representationLow.tex");
+        File representation = new File(TexLoader.TEX_DIR.getAbsolutePath() + File.separator + "representationLow.tex");
 
-        RepresentationLow template = new RepresentationLow(repres);
-        template.generate();
+        RepresentationLow template = new RepresentationLow(representation, values);
+        if (!template.generate())
+            System.err.println("Can't generate Tex file");
+
         try {
             TexLoader.createPdfFromTex(template.getTex());
 
@@ -20,5 +32,4 @@ public class Main {
             e.printStackTrace();
         }
     }
-
 }
