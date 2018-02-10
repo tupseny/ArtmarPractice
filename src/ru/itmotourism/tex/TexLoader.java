@@ -68,14 +68,10 @@ public class TexLoader {
 
     private static void clean(){
         System.out.println("%-- CLEANING --%");
-        try {
-            delete(TEX_DIR);
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        }
+        delete(TEX_DIR);
     }
 
-    public static void delete(File f) throws FileNotFoundException {
+    public static void delete(File f) {
         if (f.isDirectory()) {
             for (File c : Objects.requireNonNull(f.listFiles())) {
                 if (!saveFiles.contains(c)) {
