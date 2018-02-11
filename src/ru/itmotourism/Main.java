@@ -1,21 +1,44 @@
 package ru.itmotourism;
 
-import ru.itmotourism.tex.TexLoader;
-import ru.itmotourism.tex.templates.RepresentationLow;
+import tex.TexLoader;
+import tex.templates.RepresentationLow;
 
 import java.io.File;
+import java.io.FileNotFoundException;
 
 public class Main {
     public static void main(String[] args) {
-        File tex = TexLoader.TEX_DIR;
-        TexLoader.saveFile(TexLoader.TEX_DIR);
+        File pdflatex = new File(System.getenv("ProgramFiles(x86)")
+                + File.separator + "MiKTeX 2.9"
+                + File.separator + "miktex"
+                + File.separator + "bin"
+                + File.separator + "pdflatex.exe");
 
-        String[] values = {"1", "name", "birth date", "rang", "rang date", "competition", "result", "teachers name"};
+        if (args.length > 0){
+            pdflatex = new File(args[0]);
+        }
 
-        RepresentationLow representationLow = new RepresentationLow(tex, values);
-        representationLow.generate();
+        try {
+            TexLoader.setPdfLatex(pdflatex);
+        } catch (FileNotFoundException e) {
+            System.out.println(e.getMessage());
+            e.printStackTrace();
+            return;
+        }
 
-        TexLoader.createPdfFromTex(representationLow.getTex());
-        //TODO: Ошибка доступа
+        //Sets resource directory
+        TexLoader.setResDir(new File(System.getProperty("user.dir") + File.separator + "res"));
+
+        RepresentationLow pattern = new RepresentationLow();
+
+        //add person to document
+        pattern.add(RepresentationLow.EXAMPLE_ARRAY);
+
+        //generate TeX document
+        pattern.generate();
+
+        //generate PDF from TeX (saves it in output directory)
+        //TexLoader.OUT_DIR.getAbsolutePath(); //get output directory
+        TexLoader.createPdfFromTex(pattern.getTex());
     }
 }
